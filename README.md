@@ -4,6 +4,7 @@
 What it does
 * It will build a container that has everything needed to run Mapit.
 
-What it doesn't yet do
-* Run the processes at startup
-* Create a django admin user
+What it doesn't do
+* Run the processes at startup (TODO)
+* Create a django admin user (TODO)
+* Install data (TODO: An Australian mapit with data preloaded as a separate docker image)
