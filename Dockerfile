@@ -29,7 +29,9 @@ RUN mkdir -p /var/run/postgresql /var/run/nginx /var/run/mapit /var/log/supervis
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 # Permissions seem to be wrong on postgres server.key after building on docker hub
+# This is also possibly related to https://github.com/dotcloud/docker/issues/783
 # TODO Investigate this further rather than working around
+RUN cp /etc/ssl/private/ssl-cert-snakeoil.key /var/lib/postgresql/9.1/main/server.key
 RUN chown postgres:postgres /var/lib/postgresql/9.1/main/server.key
 
 EXPOSE 80
