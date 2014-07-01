@@ -3,9 +3,9 @@
 
 What it does
 * It will build a container that has everything needed to run Mapit.
+* Runs the processes at startup managed by supervisord
 
 What it doesn't do
-* Run the processes at startup (TODO)
 * Create a django admin user (TODO)
 * Install an ssh server (TODO)
 * Install data (TODO: An Australian mapit with data preloaded as a separate docker image)
