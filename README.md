@@ -7,4 +7,5 @@ What it does
 What it doesn't do
 * Run the processes at startup (TODO)
 * Create a django admin user (TODO)
+* Install an ssh server (TODO)
 * Install data (TODO: An Australian mapit with data preloaded as a separate docker image)
