@@ -22,3 +22,12 @@ RUN apt-get install -y postgresql postgresql-9.1-postgis
 
 ADD https://raw.github.com/mysociety/commonlib/master/bin/install-site.sh /install-site.sh
 RUN service postgresql start; /bin/bash /install-site.sh --default mapit mapit localhost
+
+# Install Supervisor to manage multiple processes running in the docker container
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/run/postgresql /var/run/nginx /var/run/mapit /var/log/supervisor
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+EXPOSE 80
+CMD ["/usr/bin/supervisord"]
