@@ -28,6 +28,9 @@ RUN apt-get install -y supervisor
 RUN mkdir -p /var/run/postgresql /var/run/nginx /var/run/mapit /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+# Permissions seem to be wrong on postgres server.key after building on docker hub
+# TODO Investigate this further rather than working around
+RUN chown postgres:postgres /var/lib/postgresql/9.1/main/server.key
 
 EXPOSE 80
 CMD ["/usr/bin/supervisord"]
