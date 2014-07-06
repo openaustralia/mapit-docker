@@ -34,5 +34,12 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 #RUN cp /etc/ssl/private/ssl-cert-snakeoil.key /var/lib/postgresql/9.1/main/server.key
 #RUN chown postgres:postgres /var/lib/postgresql/9.1/main/server.key
 
+# See this: https://code.djangoproject.com/ticket/16778
+RUN echo "standard_conforming_strings = off" >> /etc/postgresql/9.1/main/postgresql.conf
+# Curious. Expected Shapely to be installed earlier
+RUN pip install Shapely
+# Turn debug off so we don't run out of memory during imports
+RUN sed 's/DEBUG: True/DEBUG: False/' /var/www/mapit/mapit/conf/general.yml > /var/www/mapit/mapit/conf/general2.yml; mv /var/www/mapit/mapit/conf/general2.yml /var/www/mapit/mapit/conf/general.yml
+
 EXPOSE 80
 CMD ["/usr/bin/supervisord"]
