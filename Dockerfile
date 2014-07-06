@@ -42,6 +42,9 @@ RUN pip install Shapely
 # Turn debug off so we don't run out of memory during imports
 RUN sed 's/DEBUG: True/DEBUG: False/' /var/www/mapit/mapit/conf/general.yml > /var/www/mapit/mapit/conf/general2.yml; mv /var/www/mapit/mapit/conf/general2.yml /var/www/mapit/mapit/conf/general.yml
 
+# unzip and ogr2ogr are handy for dealing with boundary data. So, installing now.
+RUN apt-get install -y unzip gdal-bin
+
 # Cleanup. This is only really truly going to be useful if we flatten this image so that we
 # remove intermediate images
 RUN apt-get clean
