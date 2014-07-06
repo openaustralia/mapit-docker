@@ -21,6 +21,7 @@ RUN apt-get install -y postgresql postgresql-9.1-postgis
 
 ADD https://raw.github.com/mysociety/commonlib/master/bin/install-site.sh /install-site.sh
 RUN service postgresql start; /bin/bash /install-site.sh --default mapit mapit localhost
+RUN rm /install-site.sh
 
 # Install Supervisor to manage multiple processes running in the docker container
 RUN apt-get install -y supervisor
@@ -40,6 +41,11 @@ RUN echo "standard_conforming_strings = off" >> /etc/postgresql/9.1/main/postgre
 RUN pip install Shapely
 # Turn debug off so we don't run out of memory during imports
 RUN sed 's/DEBUG: True/DEBUG: False/' /var/www/mapit/mapit/conf/general.yml > /var/www/mapit/mapit/conf/general2.yml; mv /var/www/mapit/mapit/conf/general2.yml /var/www/mapit/mapit/conf/general.yml
+
+# Cleanup. This is only really truly going to be useful if we flatten this image so that we
+# remove intermediate images
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 80
 CMD ["/usr/bin/supervisord"]
