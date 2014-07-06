@@ -1,7 +1,7 @@
 ## Dockerized Mapit
 ### This is a work in progress and not yet ready to be used
 
-###How to run this
+### How to run this
 
 You actually don't need this repository to try it out. The docker image built from this is
 automatically available from the [Docker Hub](https://hub.docker.com/).
@@ -19,12 +19,16 @@ default install of Mapit.
 
 All this without the hassle of having to configure a whole machine.
 
-###What it does
+### What it does
 * It will build a container that has everything needed to run Mapit.
 * Runs the processes at startup managed by supervisord
 
-###What it doesn't do
-* Create a django admin user (TODO)
+### What it doesn't do
 * Install an ssh server (TODO)
-* Install data (TODO: An Australian mapit with data preloaded as a separate docker image)
 * Setup logging for processes
+
+### Installing data
+
+This docker container can be used as a base image into which you can load boundary data that you
+need. To see this in action take a look at the
+[dockerized Australian MapIt](https://github.com/openaustralia/mapit-australia-docker).
